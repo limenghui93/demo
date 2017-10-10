@@ -1,7 +1,19 @@
 package com.example.demo.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
+/**
+ * 
+ * The class User.
+ *
+ * Description:用户表
+ *
+ * @author: limenghui
+ * @since: 2017年10月10日
+ * @version: $Revision$ $Date$ $LastChangedBy$
+ *
+ */
 public class User implements Serializable {
 
 	/**
@@ -9,10 +21,13 @@ public class User implements Serializable {
 	 */
 
 	private static final long serialVersionUID = 1L;
-	private String name = "zhangsan";
-	private String password = "123456";
-	private String phone = "18637630596";
-	private String email = "905283340@qq.com";
+	private String id;
+	private String name;
+	private String password;
+	private String phone;
+	private String email;
+	private Date createTime;
+	private Date updateTime;
 
 	public User() {
 
@@ -48,6 +63,30 @@ public class User implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
 	}
 
 }
