@@ -1,7 +1,14 @@
-package com.example.demo.model;
+package com.example.demo.model.sys;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * 
@@ -14,6 +21,8 @@ import java.util.Date;
  * @version: $Revision$ $Date$ $LastChangedBy$
  *
  */
+@Entity
+@Table(name = "user")
 public class User implements Serializable {
 
 	/**
@@ -21,16 +30,50 @@ public class User implements Serializable {
 	 */
 
 	private static final long serialVersionUID = 1L;
-	private String id;
-	private String name;
+	/**
+	 * 主键
+	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Long id;
+	/**
+	 * 账号
+	 */
+	@Column(name = "username", length = 100)
+	private String username;
+	/**
+	 * 密码
+	 */
+	@Column(name = "password", length = 32)
 	private String password;
+	/**
+	 * 姓名
+	 */
+	@Column(name = "name", length = 64)
+	private String name;
+	/**
+	 * 电话
+	 */
+	@Column(name = "phone", length = 15)
 	private String phone;
+	/**
+	 * 电子邮件
+	 */
+	@Column(name = "email", length = 20)
 	private String email;
+	/**
+	 * 创建时间
+	 */
+	@Column(name = "create_time", length = 20)
 	private Date createTime;
+	/**
+	 * 更新时间
+	 */
+	@Column(name = "update_time", length = 20)
 	private Date updateTime;
 
 	public User() {
-
 	}
 
 	public String getName() {
@@ -39,6 +82,22 @@ public class User implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
@@ -63,14 +122,6 @@ public class User implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public Date getCreateTime() {

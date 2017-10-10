@@ -1,7 +1,12 @@
-package com.example.demo.model;
+package com.example.demo.model.sys;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * 
@@ -14,33 +19,75 @@ import java.util.Date;
  * @version: $Revision$ $Date$ $LastChangedBy$
  *
  */
-public class Resources implements Serializable {
+public class Resource implements Serializable {
 
 	/**
 	 * Comment for <code>serialVersionUID</code>
 	 */
 
 	private static final long serialVersionUID = 1L;
-	private String id;
-	private String pid; //父id 上级ID
-	private String type; // 1:菜单 2:按钮 3:接口
-	private String menu; //菜单
-	private String button;//按钮
-	private String url; //url
-	private String icon; //菜单图标
-	private String description; //描述
+	/**
+	 * 主键
+	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Long id;
+	/**
+	 * 父ID
+	 */
+	@Column(name = "pid", length = 64)
+	private String pid;
+	/**
+	 * 类型
+	 */
+	@Column(name = "type", length = 64)
+	private String type;//类型 1:菜单 2:按钮 3:菜单
+	/**
+	 * 菜单
+	 */
+	@Column(name = "menu", length = 64)
+	private String menu;
+	/**
+	 * 按钮
+	 */
+	@Column(name = "button", length = 64)
+	private String button;
+	/**
+	 * url
+	 */
+	@Column(name = "url", length = 64)
+	private String url;
+	/**
+	 * 图标
+	 */
+	@Column(name = "icon", length = 64)
+	private String icon;
+	/**
+	 * 描述
+	 */
+	@Column(name = "description", length = 64)
+	private String description;
+	/**
+	 * 创建时间
+	 */
+	@Column(name = "create_time", length = 20)
 	private Date createTime;
+	/**
+	 * 更新时间
+	 */
+	@Column(name = "update_time", length = 20)
 	private Date updateTime;
 
-	public Resources() {
+	public Resource() {
 
 	}
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

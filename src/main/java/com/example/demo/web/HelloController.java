@@ -3,7 +3,7 @@ package com.example.demo.web;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.model.User;
+import com.example.demo.model.sys.User;
 
 @RestController
 public class HelloController {
