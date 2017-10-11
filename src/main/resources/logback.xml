@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds">
+
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+
+    <!-- To enable JMX Management -->
+    <jmxConfigurator />
+    
+    <timestamp key="byDay" datePattern="yyyy-MM-dd"/>
+    
+    <property name="log.base" value="/opt/appl/logs/account-book/${byDay}" />
+    <property name="log.info" value="${log.base}/info" />
+    <property name="log.warn" value="${log.base}/warn" />
+    <property name="log.error" value="${log.base}/error" />
+    <property name="log.sql" value="${log.base}/sql" />
+    <!-- 单个压缩文件最大大小 -->
+    <property name="log.maxFileSize" value="20MB" />
+    <!-- 日志保存60天 -->  
+    <property name="log.maxHistory" value="60" />
+    <!-- 压缩文件总共大小最大30GB -->
+    <property name="log.totalSizeCap" value="30GB" />
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder charset="UTF-8">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level [%F:%L] %msg%n</pattern>
+        </encoder>
+    </appender>
+     
+    
+    <!-- logback 1.1.7才支持SizeAndTimeBasedRollingPolicy -->
+    <appender name="INFO_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${log.info}.log</File>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- 把按大小日期分割出来的文件压缩成zip格式 -->
+            <fileNamePattern>${log.info}_%d{yyyyMMdd}.%i.zip</fileNamePattern>
+            <!-- 单个文件最大大小 -->
+            <maxFileSize>${log.maxFileSize}</maxFileSize>  
+            <!-- 日志保存60天 -->  
+            <maxHistory>${log.maxHistory}</maxHistory>
+            <!-- 压缩文件总共大小最大30G -->
+            <totalSizeCap>${log.totalSizeCap}</totalSizeCap>
+        </rollingPolicy>
+        
+        <encoder charset="UTF-8">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level [%F:%L] %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="WARN_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${log.warn}.log</File>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- 把按大小日期分割出来的文件压缩成zip格式 -->
+            <fileNamePattern>${log.warn}_%d{yyyyMMdd}.%i.zip</fileNamePattern>
+            <!-- 单个文件最大大小 -->
+            <maxFileSize>${log.maxFileSize}</maxFileSize>  
+            <!-- 日志保存60天 -->  
+            <maxHistory>${log.maxHistory}</maxHistory>
+            <!-- 压缩文件总共大小最大30G -->
+            <totalSizeCap>${log.totalSizeCap}</totalSizeCap>
+        </rollingPolicy>
+        
+        <encoder charset="UTF-8">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level [%F:%L] %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${log.error}.log</File>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- 把按大小日期分割出来的文件压缩成zip格式 -->
+            <fileNamePattern>${log.error}_%d{yyyyMMdd}.%i.zip</fileNamePattern>
+            <!-- 单个文件最大大小 -->
+            <maxFileSize>${log.maxFileSize}</maxFileSize>  
+            <!-- 日志保存60天 -->  
+            <maxHistory>${log.maxHistory}</maxHistory>
+            <!-- 压缩文件总共大小最大30G -->
+            <totalSizeCap>${log.totalSizeCap}</totalSizeCap>
+        </rollingPolicy>
+        
+        <encoder charset="UTF-8">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level [%F:%L] %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="SQL_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${log.sql}.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- 把按大小日期分割出来的文件压缩成zip格式 -->
+            <fileNamePattern>${log.sql}_%d{yyyyMMdd}.%i.zip</fileNamePattern>
+            <!-- 单个文件最大大小 -->
+            <maxFileSize>${log.maxFileSize}</maxFileSize>  
+            <!-- 日志保存60天 -->  
+            <maxHistory>${log.maxHistory}</maxHistory>
+            <!-- 压缩文件总共大小最大30G -->
+            <totalSizeCap>${log.totalSizeCap}</totalSizeCap>
+        </rollingPolicy>
+        
+        <encoder charset="UTF-8">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level [%F:%L] %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <!-- show parameters for hibernate sql 专为 Hibernate 定制-->
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder"  level="TRACE" >
+        <appender-ref ref="SQL_FILE" />
+    </logger>  
+    <logger name="org.hibernate.type.descriptor.sql.BasicExtractor"  level="DEBUG" >
+      <appender-ref ref="SQL_FILE" />
+    </logger>  
+    <logger name="org.hibernate.SQL" level="DEBUG" >
+      <appender-ref ref="SQL_FILE" />
+    </logger>  
+    <logger name="org.hibernate.type" level="TRACE" >
+      <appender-ref ref="SQL_FILE" />
+    </logger>  
+    <logger name="org.hibernate.engine.QueryParameters" level="DEBUG" >
+      <appender-ref ref="SQL_FILE" />
+    </logger>    
+    <logger name="org.hibernate.engine.query.HQLQueryPlan" level="DEBUG" >
+      <appender-ref ref="SQL_FILE" />
+    </logger>    
+    
+
+    <!-- 配置其它所有组件的日志等级 -->
+    <root level="info">
+    	<appender-ref ref="CONSOLE" />
+        <appender-ref ref="INFO_FILE" />
+        <appender-ref ref="WARN_FILE" />
+        <appender-ref ref="ERROR_FILE" />
+    </root>
+    
+</configuration>
