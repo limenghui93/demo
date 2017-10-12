@@ -2,6 +2,7 @@ package com.example.demo.model.sys;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * 
@@ -72,6 +74,9 @@ public class User implements Serializable {
 	 */
 	@Column(name = "update_time", length = 20)
 	private Date updateTime;
+
+	@Transient
+	private List<Role> list;
 
 	public User() {
 	}

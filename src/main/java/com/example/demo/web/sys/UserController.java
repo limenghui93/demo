@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.sys.User;
-import com.example.demo.service.UserService;
+import com.example.demo.service.impl.UserServiceImpl;
 
 @RestController
 public class UserController {
@@ -15,10 +15,10 @@ public class UserController {
 	private static Logger log = LoggerFactory.getLogger(UserController.class);
 
 	@Autowired
-	private UserService userService;
+	private UserServiceImpl userService;
 
 	@GetMapping(value = "/getUserInfo")
-	public User getUserInfo(String username) {
-		return userService.getUserInfo(username);
+	public User getUserInfo(String username, String password) {
+		return userService.getUser(username, password);
 	}
 }

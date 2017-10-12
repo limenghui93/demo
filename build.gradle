@@ -20,14 +20,15 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
-    maven { url "http://repo.spring.io/libs-snapshot" } //使用远程仓库
-  	mavenLocal()        //使用本地仓库
+	mavenLocal()        //使用本地仓库
     mavenCentral()      //使用中央仓库
-	
 }
 
 configurations {
 	providedRuntime
+}
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 10, 'seconds'//10秒钟，可自定义，如10,'minutes'10分钟，10,'hours'10小时
 }
 
 dependencies {
@@ -38,7 +39,5 @@ dependencies {
 	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.6'
-	compile group: 'org.apache.shiro', name: 'shiro-spring', version: '1.4.0'
-	
-          
-}
+	compile group: 'org.apache.shiro', name: 'shiro-spring', version: '1.2.3'
+	}
